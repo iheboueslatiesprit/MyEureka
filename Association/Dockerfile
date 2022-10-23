@@ -1,7 +1,9 @@
 FROM maven:3.8.6-openjdk-11
 
-WORKDIR /job
-COPY . .
-RUN mvn clean install
+ARG JAR_FILE=target/*.jar
 
-CMD mvn spring-boot:run
+RUN mkdir /opt/customer-app
+
+COPY ${JAR_FILE} /opt/association-app/app.jar
+
+ENTRYPOINT ["java", "-jar", "/opt/association-app/app.jar"]

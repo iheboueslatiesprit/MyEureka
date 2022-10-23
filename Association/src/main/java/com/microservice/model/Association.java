@@ -1,10 +1,11 @@
 package com.microservice.model;
-
+import com.microservice.model.Tournois;
 
 
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.Set;
 
 
 @Data
@@ -16,4 +17,8 @@ public class Association {
     private Integer id;
 
     private String nom;
+
+    @OneToMany(cascade = CascadeType.ALL,mappedBy = "association")
+    Set<Tournois> tournoisList;
+
 }

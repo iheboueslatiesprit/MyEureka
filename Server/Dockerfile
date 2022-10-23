@@ -1,7 +1,9 @@
 FROM maven:3.8.6-openjdk-11
 
-WORKDIR /server
-COPY . .
-RUN mvn clean install
+ARG JAR_FILE=target/*.jar
 
-CMD mvn spring-boot:run
+RUN mkdir /opt/eureka-server
+
+COPY ${JAR_FILE} /opt/eureka-server/app.jar
+
+ENTRYPOINT ["java", "-jar", "/opt/eureka-server/app.jar"]
